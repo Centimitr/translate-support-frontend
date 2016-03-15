@@ -1,12 +1,13 @@
 /*
  * Angular 2 decorators and services
  */
-import {Component} from 'angular2/core';
+import {Component, OnInit} from 'angular2/core';
 import {RouteConfig, Router, ROUTER_DIRECTIVES} from 'angular2/router';
 import {FORM_PROVIDERS} from 'angular2/common';
 
 import {RouterActive} from './directives/router-active';
 import {Home} from './home/home';
+import {DiffService} from "./diff.service";
 
 /*
  * App Component
@@ -14,7 +15,7 @@ import {Home} from './home/home';
  */
 @Component({
   selector: 'app',
-  providers: [ ...FORM_PROVIDERS ],
+  providers: [ ...FORM_PROVIDERS,DiffService ],
   directives: [ ...ROUTER_DIRECTIVES, RouterActive ],
   pipes: [],
   //styles: [`
@@ -86,12 +87,23 @@ select version <br>
   { path: '/about', loader: () => require('es6-promise!./about/about')('About'), name: 'About' },
   { path: '/**', redirectTo: ['Index'] }
 ])
-export class App{
+export class App implements OnInit{
   angularclassLogo = 'assets/img/angularclass-avatar.png';
   name = 'Angular 2 Webpack Starter';
   url = 'https://twitter.com/AngularClass';
-  constructor() {
+  constructor(private _diffService:DiffService) {}
 
+  diff={};
+
+  ngOnInit(){
+    this.getDiff();
+  }
+
+  getDiff(){
+    this._diffService.getDiff('beta.1','beta.0','1.txt')
+    .subscribe(
+      diff => this.diff = diff
+    )
   }
 }
 
