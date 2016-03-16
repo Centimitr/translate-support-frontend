@@ -29,6 +29,7 @@ export class RouterActive {
   routerActive: string = null;
   routerActiveAttr: string = 'active';
 
+  //noinspection TypeScriptValidateTypes
   constructor(
     public router: Router,
     public element: ElementRef,

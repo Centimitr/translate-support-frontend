@@ -33,46 +33,61 @@ import {DiffService} from "./diff.service";
   //    background-color: lightgray;
   //  }
   //`],
+  styleUrls:['diff.css'],
   template: `<header>
   <nav class="navbar navbar-light bg-faded">
-  <div class="nav navbar-nav container">
+    <div class="nav navbar-nav container">
       <a class="nav-item nav-link" [routerLink]=" ['About'] ">About</a>
-    <a class="nav-item nav-link" [routerLink]=" ['Index'] ">Index</a>
-    <a class="nav-item nav-link" [routerLink]=" ['Home'] ">Home</a>
+      <a class="nav-item nav-link" [routerLink]=" ['Index'] ">Index</a>
+      <a class="nav-item nav-link" [routerLink]=" ['Home'] ">Home</a>
     </div>
   </nav>
 </header>
 
 <main>
-<br><br>
-<section class="container">
-<h4>Init</h4>
-<button class="btn btn-secondary">Set source lang</button>
-<button class="btn btn-secondary">Set target lang</button>
-<hr>
-<h4>Versions</h4>
-<button class="btn btn-secondary">Add Version</button>
-<br>
-alpha.0 18456/45613 45%<br>
-alpha.1 <br>
-alpha.2 <br>
-beta.0 <br>
-<hr>
-<h4>Watch list</h4>
-<button class="btn btn-secondary">change base version</button>
-<button class="btn btn-secondary">Init Watch</button>
-<button class="btn btn-secondary">Init translate</button>
-<button class="btn btn-secondary">Add Watch</button>
-<br>
-select version <br>
--blabla <br>
----blabla 12345/4567 30% complete<br>
-<hr>
-<h4>Comparison</h4>
-<div>README.md</div>
-<div>compare: 151+ 100-</div>
-<div>progress: 123/251</div>
-</section>
+  <br><br>
+  <section class="container">
+    <h4>Init</h4>
+    <button class="btn btn-secondary">Set source lang</button>
+    <button class="btn btn-secondary">Set target lang</button>
+    <hr>
+    <h4>Versions</h4>
+    <button class="btn btn-secondary">Add Version</button>
+    <br>
+    alpha.0 18456/45613 45%<br>
+    alpha.1 <br>
+    alpha.2 <br>
+    beta.0 <br>
+    <hr>
+    <h4>Watch list</h4>
+    <button class="btn btn-secondary">change base version</button>
+    <button class="btn btn-secondary">Init Watch</button>
+    <button class="btn btn-secondary">Init translate</button>
+    <button class="btn btn-secondary">Add Watch</button>
+    <br>
+    select version <br>
+    -blabla <br>
+    ---blabla 12345/4567 30% complete<br>
+    <hr>
+    <h4>Comparison</h4>
+    <div>README.md</div>
+    <div>compare: 151+ 100-</div>
+    <div>progress: 123/251</div>
+    <section>
+      <div class="row" *ngFor="#l of diff">
+        <div class="order">{{l.isAdded?'':l.oldOrder}}</div>
+        <div class="order">{{l.isRemoved?'':l.newOrder}}</div>
+        <div class="line"
+             [class.unmodified]="l.isUnmodified"
+             [class.added]="l.isAdded"
+             [class.removed]="l.isRemoved">
+          {{l.text?l.text:'&nbsp;'}}
+        </div>
+      </div>
+    </section>
+    <br>
+    <hr>
+  </section>
   <router-outlet></router-outlet>
 </main>
 
@@ -93,17 +108,18 @@ export class App implements OnInit{
   url = 'https://twitter.com/AngularClass';
   constructor(private _diffService:DiffService) {}
 
-  diff={};
 
   ngOnInit(){
     this.getDiff();
   }
 
+  diff=[];
+
   getDiff(){
     this._diffService.getDiff('beta.1','beta.0','1.txt')
-    .subscribe(
-      diff => this.diff = diff
-    )
+      .subscribe(
+        diff  => this.diff = diff
+      );
   }
 }
 
