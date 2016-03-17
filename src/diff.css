@@ -1,46 +1,92 @@
-.row{
+/*
+    info
+*/
+.info {
+  font-size: 14px;
+}
+
+/*
+    progress
+*/
+.progress {
+  margin-top: 8px;
+  display: flex;
+  flex-flow: row nowrap;
+  height: 4px;
+  width: 100%;
+}
+
+.progress-cell {
+  width: 100%;
+  height: 100%;
+}
+
+.progress-exist {
+  background-color: #6aa76a;
+}
+
+.progress-vacant {
+  background-color: #dddddd;
+}
+
+/*
+    diff
+*/
+.row {
   display: flex;
   flex-flow: row nowrap;
 }
-.order{
+
+.order {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
   width: 48px;
   border-right: 1px solid #dddddd;
   font-size: 12px;
   text-align: right;
-  padding:0 4px;
+  padding: 0 4px;
 }
-.line{
+
+.line {
   border-left: 4px solid #e8e8e8;
   /*font-family: Consolas, Menlo, Monaco, monospace,"Microsoft YaHei UI";*/
   font-family: "Microsoft YaHei UI";
-  padding:2px 0px;
-  width:100%;
+  padding: 2px 0px;
+  width: 100%;
   font-size: 13px;
 }
-.symbol{
+
+.symbol {
   width: 24px;
   text-align: center;
 }
-.unmodified:before{
-  content:""
+
+.unmodified:before {
+  content: ""
 }
-.added{
+
+.added {
   color: #0a2300;
   background-color: #eaffea;
 }
-.added:before{
+
+.added:before {
   content: '+';
 }
-.removed{
+
+.removed {
   color: #780520;
   background-color: #ffecec;
 }
-.removed:before{
+
+.removed:before {
   content: '-';
   width: 24px;
 }
 
-.unmodified:before,.added:before,.removed:before{
+.unmodified:before, .added:before, .removed:before {
   display: inline-block;
   width: 30px;
   font-size: 12px;
