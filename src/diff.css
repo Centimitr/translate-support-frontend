@@ -32,7 +32,17 @@
 /*
     diff
 */
+.diff{
+  margin-top: 12px;
+  border:1px solid #dddddd;
+  border-radius: 2px;
+  box-sizing: border-box;
+}
+
 .row {
+  width:100%;
+  margin:0;
+  padding:0;
   display: flex;
   flex-flow: row nowrap;
 }
@@ -43,6 +53,7 @@
   -ms-user-select: none;
   user-select: none;
   width: 48px;
+  min-width: 48px;
   border-right: 1px solid #dddddd;
   font-size: 12px;
   text-align: right;
@@ -92,4 +103,11 @@
   font-size: 12px;
   padding-right: 6px;
   text-align: center;
+}
+
+.line-progress{
+  width: 3px;
+}
+.line-progress-exist{
+  background-color: #a8d5a1;
 }

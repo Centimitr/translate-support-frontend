@@ -12,11 +12,11 @@ export class DiffService{
   constructor(private http:Http){}
   private _url = 'http://localhost:4567/api/versions/v/compare/';
 
-  getDiff(version:string,oldVersion:string,filename:string){
+  getDiff(version:string,oldVersion:string,filepath:string){
     let search = new URLSearchParams();
     search.set('version',version);
     search.set('oldVersion',oldVersion);
-    search.set('filename',filename);
+    search.set('filepath',filepath);
     let options = new RequestOptions({search:search});
 
     return this.http.get(this._url,options)
