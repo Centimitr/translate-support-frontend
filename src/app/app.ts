@@ -6,8 +6,6 @@ import {RouteConfig, Router, ROUTER_DIRECTIVES} from 'angular2/router';
 import {FORM_PROVIDERS} from 'angular2/common';
 
 import {RouterActive} from './directives/router-active';
-import {Home} from './home/home';
-import {DiffService} from "./diff.service";
 import {DiffComponent} from "./diff.component";
 import {InitComponent} from "./init.component";
 import {WatchComponent} from "./watch.component";
@@ -26,9 +24,9 @@ import {VersionComponent} from "./version.component";
   template: `<header>
   <nav class="navbar navbar-light bg-faded">
     <div class="nav navbar-nav container">
-      <a class="nav-item nav-link" [routerLink]=" ['Init'] ">Init</a>
+      <!--<a class="nav-item nav-link" [routerLink]=" ['Init'] ">Init</a>-->
       <a class="nav-item nav-link" [routerLink]=" ['Version'] ">Version</a>
-      <a class="nav-item nav-link" [routerLink]=" ['Watch'] ">Watch</a>
+      <!--<a class="nav-item nav-link" [routerLink]=" ['Watch'] ">Watch</a>-->
     </div>
   </nav>
 </header>
@@ -43,13 +41,12 @@ import {VersionComponent} from "./version.component";
   `
 })
 @RouteConfig([
-  {path: '/', component: Home, name: 'Index'},
-  {path: '/init', component: InitComponent, name: 'Init'},
+  // {path: '/init', component: InitComponent, name: 'Init'},
   {path: '/version', component: VersionComponent, name: 'Version'},
-  {path: '/watch', component: WatchComponent, name: 'Watch'},
+  {path: '/version/:version/watch', component: WatchComponent, name: 'Watch'},
   // Async load a component using Webpack's require with es6-promise-loader and webpack `require`
   //{path: '/about', loader: () => require('es6-promise!./about/about')('About'), name: 'About'},
-  {path: '/**', redirectTo: ['Index']}
+  {path: '/**', redirectTo: ['Version']}
 ])
 export class App implements OnInit {
   constructor() {

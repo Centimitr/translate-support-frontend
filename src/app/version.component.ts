@@ -4,13 +4,14 @@
 
 import {Component, OnInit} from 'angular2/core';
 import {FORM_PROVIDERS} from 'angular2/common';
+import {RouteConfig, Router, ROUTER_DIRECTIVES} from 'angular2/router';
 import {VersionService} from "./version.service";
 
 
 @Component({
   selector: 'version',
   providers: [VersionService],
-  directives: [],
+  directives: [ROUTER_DIRECTIVES],
   pipes: [],
   styleUrls: ['command-list.css', 'sidebar.css'],
   template: `<section class="col-md-3">
@@ -28,7 +29,7 @@ import {VersionService} from "./version.service";
   <div class="sidebar-group">
     <div class="sidebar-title">Versions</div>
     <ul class="command-list">
-      <li *ngFor="#v of versions"><a [style.color]="'#666'" [style.font-size]="'15px'">{{v.name}}</a></li>
+      <li *ngFor="#v of versions"><a [style.color]="'#666'" [style.font-size]="'15px'" [routerLink]="['/Watch',{version:v.name}]">{{v.name}}</a></li>
     </ul>
   </div>
   <div style="position: fixed;bottom: 12px;cursor: pointer;color: #0275de;">

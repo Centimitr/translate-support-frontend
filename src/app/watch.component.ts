@@ -4,6 +4,7 @@
 
 import {Component, OnInit} from 'angular2/core';
 import {FORM_PROVIDERS} from 'angular2/common';
+import {RouteParams} from 'angular2/router';
 import {DiffComponent} from "./diff.component";
 import {DiffService} from "./diff.service";
 import {WatchService} from "./watch.service";
@@ -38,10 +39,11 @@ import {WatchService} from "./watch.service";
 <diff class="col-md-9"></diff>`
 })
 export class WatchComponent implements OnInit {
-  constructor(private _watchService:WatchService) {
+  constructor(private _watchService:WatchService,private _params:RouteParams) {
+    this.version = _params.get('version')
   }
 
-  version = 'beta.1';
+  version = '';
   filepath = '1.txt';
   watches = <string[]>[];
 
@@ -49,10 +51,12 @@ export class WatchComponent implements OnInit {
     this.getWatches();
   }
   getWatches() {
-    this._watchService.getWatches(this.version)
-      .subscribe(
-        watches => this.watches = <string[]>watches
-      );
+    if (this.version!==''){
+      this._watchService.getWatches(this.version)
+        .subscribe(
+          watches => this.watches = <string[]>watches
+        );
+    }
   }
   addWatch() {
     if (this.filepath!==''){
